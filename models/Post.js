@@ -9,18 +9,16 @@ const postSchema = new Schema({
         required: true,
         trim: true
     },
-    body: {
+    description: {
         type: String,
         required: true,
         trim: true,
-        unique: true
     },
     likes: Number,
     shares: Number,
     profile: {
         type: Schema.Types.ObjectId,
         ref: "Profile",
-        required: true
     }
 
 }, { timestamps: true })

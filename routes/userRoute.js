@@ -9,6 +9,10 @@ const User = require('../models/User');
 const userRoute = express.Router()
 
 
+userRoute.get('/', (req, res) => {
+    res.send("hello from user")
+})
+
 // Add  new User
 userRoute.post('/adduser', async (req, res) => {
     try {
@@ -52,13 +56,12 @@ userRoute.post('/profile/:userId', async (req, res) => {
 userRoute.post('/addpost/:profileId', async (req, res) => {
     try {
         const profileId = req.params.profileId;
+
         const post = new Post({
-            title: req.body.title,
-            body: req.body.body,
-            likes: req.body.likes,
-            shares: req.body.shares,
+            ...req?.body,
             profile: profileId
         });
+        // return console.log(post)
         const result = await post.save();
         const update = await Profile.findOneAndUpdate({ _id: profileId }, {
             $push: {
@@ -80,8 +83,6 @@ userRoute.get('/', async (req, res) => {
     for (let doc of result) {
         await Profile.populate(doc.profile, { path: "posts" })
     }
-
-
     res.send(result)
 })
 

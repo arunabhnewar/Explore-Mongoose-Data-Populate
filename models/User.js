@@ -19,7 +19,6 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true,
-        unique: true,
     },
     profile: {
         type: Schema.Types.ObjectId,
