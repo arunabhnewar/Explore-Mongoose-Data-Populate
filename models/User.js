@@ -29,35 +29,6 @@ const userSchema = new Schema({
 }, { timestamps: true });
 
 
-
-// Instance Method
-userSchema.methods = {
-    getAll: function (n) {
-        return model('User').find({}).limit(n)
-    }
-}
-
-
-
-// Statics Method
-userSchema.statics = {
-    getAll: function (n) {
-        return model('User').find({}).limit(n)
-    }
-}
-
-
-
-// Query Helpers
-userSchema.query = {
-    searchByName: function (namStr) {
-        return this.$where({ name: new RegExp(namStr, 'ig') })
-    }
-}
-
-
-
-
 const User = model('User', userSchema);
 
 
